@@ -42,6 +42,22 @@ test("cpf.generate({ formatted: true }) should produce a formatted valid CPF", (
     expect(cpf.regex.formatted.test(formatted)).toBe(true)
 })
 
+test("cpf.generate({ state: 'SP' }) should use correct regional digit", () => {
+    const raw = cpf.generate({ state: "SP" })
+    expect(cpf.validate(raw)).toBe(true)
+    expect(raw[8]).toBe("8")
+})
+
+test("cpf.generate({ state: 'RJ' }) should use correct regional digit", () => {
+    const raw = cpf.generate({ state: "RJ" })
+    expect(cpf.validate(raw)).toBe(true)
+    expect(raw[8]).toBe("7")
+})
+
+test("cpf.generate with invalid state should throw", () => {
+    expect(() => cpf.generate({ state: "XX" } as any)).toThrow()
+})
+
 // --- CNPJ ---
 
 test("cnpj.validate should return true for valid formatted CNPJ", () => {
@@ -73,20 +89,4 @@ test("cnpj.generate({ formatted: true }) should produce a formatted valid CNPJ",
     const formatted = cnpj.generate({ formatted: true })
     expect(cnpj.validate(formatted)).toBe(true)
     expect(cnpj.regex.formatted.test(formatted)).toBe(true)
-})
-
-test("cnpj.generate({ state: 'SP' }) should use correct regional digit", () => {
-    const raw = cnpj.generate({ state: "SP" })
-    expect(cnpj.validate(raw)).toBe(true)
-    expect(raw[7]).toBe("8")
-})
-
-test("cnpj.generate({ state: 'RJ' }) should use correct regional digit", () => {
-    const raw = cnpj.generate({ state: "RJ" })
-    expect(cnpj.validate(raw)).toBe(true)
-    expect(raw[7]).toBe("7")
-})
-
-test("cnpj.generate with invalid state should throw", () => {
-    expect(() => cnpj.generate({ state: "XX" })).toThrow()
 })

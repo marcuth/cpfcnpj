@@ -12,7 +12,7 @@ A lightweight, high-performance TypeScript library for validation, generation, a
 - 🛡️ **Type-safe**: Built with TypeScript for excellent IDE support and reliability.
 - 📦 **Zero Dependencies**: Keeps your bundle size small.
 - 🛠️ **Full Toolkit**: Validate, generate, format, and unformat with ease.
-- 📍 **Region-Aware**: CNPJ generation support for specific Brazilian states.
+- 📍 **Region-Aware**: CPF generation support for specific Brazilian states.
 - 🆔 **Alphanumeric CNPJ**: Full support for the new 2026 CNPJ format.
 
 ## 🚀 Installation
@@ -37,12 +37,9 @@ cpf.validate('123.456.789-00'); // false
 cpf.validate('52998224725');     // true
 
 // Generation
-cpf.generate();                 // '52998224725'
-cpf.generate({ formatted: true }); // '529.982.247-25'
-
-// Formatting
-cpf.format('52998224725');      // '529.982.247-25'
-cpf.unformat('529.982.247-25'); // '52998224725'
+cpf.generate();                        // '52998224725'
+cpf.generate({ formatted: true });       // '529.982.247-25'
+cpf.generate({ state: 'SP', formatted: true }); // SP region CPF
 ```
 
 ### CNPJ (Cadastro Nacional da Pessoa Jurídica)
@@ -59,11 +56,6 @@ cnpj.validate('ABC1D23E/0001-91');     // true (Alphanumeric example)
 cnpj.generate();                      // '11222333000181'
 cnpj.generate({ formatted: true });    // '11.222.333/0001-81'
 cnpj.generate({ alphanumeric: true }); // 'ABC1D23E000191'
-cnpj.generate({ state: 'SP', formatted: true }); // SP region CNPJ
-
-// Formatting
-cnpj.format('11222333000181');         // '11.222.333/0001-81'
-cnpj.unformat('11.222.333/0001-81');    // '11222333000181'
 ```
 
 ## 🛠️ API Reference
@@ -81,8 +73,8 @@ Both modules export the following methods:
 
 #### `GenerateOptions`
 
-- **CPF**: `{ formatted?: boolean }`
-- **CNPJ**: `{ formatted?: boolean, state?: string, alphanumeric?: boolean }`
+- **CPF**: `{ formatted?: boolean, state?: string }`
+- **CNPJ**: `{ formatted?: boolean, alphanumeric?: boolean }`
 
 ## 🧪 Testing
 

@@ -1,3 +1,33 @@
+const STATE_TO_DIGIT: Record<string, string> = {
+    AC: "2",
+    AL: "4",
+    AM: "2",
+    AP: "2",
+    BA: "5",
+    CE: "3",
+    DF: "1",
+    ES: "7",
+    GO: "1",
+    MA: "3",
+    MG: "6",
+    MS: "1",
+    MT: "1",
+    PA: "2",
+    PB: "4",
+    PE: "4",
+    PI: "3",
+    PR: "9",
+    RJ: "7",
+    RN: "4",
+    RO: "2",
+    RR: "2",
+    RS: "0",
+    SC: "9",
+    SE: "5",
+    SP: "8",
+    TO: "1",
+}
+
 export const regex = {
     formatted: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
     raw: /^\d{11}$/,
@@ -40,10 +70,23 @@ export function validate(raw: string): boolean {
 
 export type GenerateOptions = {
     formatted?: boolean
+    state?: string
 }
 
 export function generate(options: GenerateOptions = {}): string {
-    const digits: number[] = Array.from({ length: 9 }, () => Math.floor(Math.random() * 10))
+    const digits: number[] = Array.from({ length: 8 }, () => Math.floor(Math.random() * 10))
+
+    if (options.state) {
+        const stateDigit = STATE_TO_DIGIT[options.state.toUpperCase()]
+
+        if (!stateDigit) {
+            throw new Error(`Invalid state: ${options.state}`)
+        }
+
+        digits.push(parseInt(stateDigit, 10))
+    } else {
+        digits.push(Math.floor(Math.random() * 10))
+    }
 
     while (digits.every((d) => d === digits[0])) {
         digits[0] = Math.floor(Math.random() * 10)
