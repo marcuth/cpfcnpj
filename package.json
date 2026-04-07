@@ -1,6 +1,6 @@
 {
-  "name": "cpfcnpj",
-  "description": "",
+  "name": "@marcuth/cpfcnpj",
+  "description": "A lightweight, high-performance TypeScript library for validation, generation, and formatting of Brazilian documents (CPF and CNPJ).",
   "version": "0.1.0",
   "type": "commonjs",
   "repository": {
@@ -32,8 +32,10 @@
   "keywords": [
     "cpf validator",
     "cpf generator",
+    "cpf formatter",
     "cnpj validator",
-    "cnpj generator"
+    "cnpj generator",
+    "cnpj formatter"
   ],
   "author": "Marcuth",
   "license": "MIT",

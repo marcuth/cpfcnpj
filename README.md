@@ -1,7 +1,7 @@
-# cpfcnpj
+# @marcuth/cpfcnpj
 
-[![npm version](https://img.shields.io/npm/v/cpfcnpj.svg?style=flat-square)](https://www.npmjs.com/package/cpfcnpj)
-[![npm downloads](https://img.shields.io/npm/dm/cpfcnpj.svg?style=flat-square)](https://www.npmjs.com/package/cpfcnpj)
+[![npm version](https://img.shields.io/npm/v/@marcuth/cpfcnpj.svg?style=flat-square)](https://www.npmjs.com/package/@marcuth/cpfcnpj)
+[![npm downloads](https://img.shields.io/npm/dm/@marcuth/cpfcnpj.svg?style=flat-square)](https://www.npmjs.com/package/@marcuth/cpfcnpj)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 A lightweight, high-performance TypeScript library for validation, generation, and formatting of Brazilian documents (CPF and CNPJ).
@@ -18,11 +18,11 @@ A lightweight, high-performance TypeScript library for validation, generation, a
 ## 🚀 Installation
 
 ```bash
-npm install cpfcnpj
+npm install @marcuth/cpfcnpj
 # or
-yarn add cpfcnpj
+yarn add @marcuth/cpfcnpj
 # or
-pnpm add cpfcnpj
+pnpm add @marcuth/cpfcnpj
 ```
 
 ## 📖 Usage
@@ -30,7 +30,7 @@ pnpm add cpfcnpj
 ### CPF (Cadastro de Pessoas Físicas)
 
 ```typescript
-import { cpf } from 'cpfcnpj';
+import { cpf } from '@marcuth/cpfcnpj';
 
 // Validation
 cpf.validate('123.456.789-00'); // false
@@ -48,7 +48,7 @@ cpf.unformat('529.982.247-25'); // '52998224725'
 ### CNPJ (Cadastro Nacional da Pessoa Jurídica)
 
 ```typescript
-import { cnpj } from 'cpfcnpj';
+import { cnpj } from '@marcuth/cpfcnpj';
 
 // Validation
 cnpj.validate('12.345.678/0001-00'); // false
