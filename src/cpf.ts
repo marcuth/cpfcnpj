@@ -1,0 +1,66 @@
+export const regex = {
+    formatted: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
+    raw: /^\d{11}$/,
+}
+
+export function unformat(formatted: string): string {
+    return formatted.replace(/\D/g, '')
+}
+
+export function format(raw: string): string {
+    const digits = unformat(raw)
+    if (!regex.raw.test(digits)) {
+        throw new Error('Invalid CPF format')
+    }
+    return `${digits.slice(0, 3)}.${digits.slice(3, 6)}.${digits.slice(6, 9)}-${digits.slice(9)}`
+}
+
+export function validate(raw: string): boolean {
+    const digits = unformat(raw)
+    if (!regex.raw.test(digits)) return false
+    if (/^(\d)\1{10}$/.test(digits)) return false
+
+    const calc = (n: number, weightStart: number): number => {
+        let sum = 0
+        for (let i = 0; i < n; i++) {
+            sum += parseInt(digits[i], 10) * (weightStart - i)
+        }
+        const remainder = sum % 11
+        return remainder < 2 ? 0 : 11 - remainder
+    }
+
+    return (
+        calc(9, 10) === parseInt(digits[9], 10) &&
+        calc(10, 11) === parseInt(digits[10], 10)
+    )
+}
+
+export type GenerateOptions = {
+    formatted?: boolean
+}
+
+export function generate(options: GenerateOptions = {}): string {
+    const digits: number[] = Array.from({ length: 9 }, () =>
+        Math.floor(Math.random() * 10)
+    )
+
+    // Avoid all-same-digit CPFs
+    while (digits.every((d) => d === digits[0])) {
+        digits[0] = Math.floor(Math.random() * 10)
+    }
+
+    const calc = (n: number, weightStart: number): number => {
+        let sum = 0
+        for (let i = 0; i < n; i++) {
+            sum += digits[i] * (weightStart - i)
+        }
+        const remainder = sum % 11
+        return remainder < 2 ? 0 : 11 - remainder
+    }
+
+    digits.push(calc(9, 10))
+    digits.push(calc(10, 11))
+
+    const raw = digits.join('')
+    return options.formatted ? format(raw) : raw
+}

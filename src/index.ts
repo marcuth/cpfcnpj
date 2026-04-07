@@ -1,5 +1,4 @@
-export function main() {
-    console.log("Hello from cpfcnpj")
-}
+import * as cnpj from "./cnpj"
+import * as cpf from "./cpf"
 
-main()
+export { cnpj, cpf }

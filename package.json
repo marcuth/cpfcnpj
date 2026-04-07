@@ -1,5 +1,6 @@
 {
   "name": "cpfcnpj",
+  "description": "",
   "version": "0.1.0",
   "type": "commonjs",
   "repository": {
@@ -29,7 +30,10 @@
     "access": "public"
   },
   "keywords": [
-    "marcuth"
+    "cpf validator",
+    "cpf generator",
+    "cnpj validator",
+    "cnpj generator"
   ],
   "author": "Marcuth",
   "license": "MIT",
